@@ -1,4 +1,4 @@
-package com.rnziparchive;
+package com.reactlibrary;
 
 import com.facebook.react.bridge.Promise;
 
@@ -15,19 +15,17 @@ import java.util.zip.ZipOutputStream;
 public class ZipTask {
   private final String destFile;
   private final String[] files;
-  private final String fromDirectory;
   private final Promise promise;
   private static final int BUFFER_SIZE = 4096;
 
   private long bytesRead = 0;
   private long totalSize;
-  private RNZipArchiveModule cb;
+  private ZipCreateModule cb;
   private String threadError;
 
-  public ZipTask(String[] files, String destFile, String fromDirectory, Promise promise, RNZipArchiveModule cb) {
+  public ZipTask(String[] files, String destFile, Promise promise, ZipCreateModule cb) {
     this.destFile = destFile;
     this.files = files;
-    this.fromDirectory = fromDirectory.endsWith("/") ? fromDirectory : fromDirectory + "/";
     this.promise = promise;
     this.cb = cb;
   }
@@ -70,7 +68,7 @@ public class ZipTask {
 
             if (!new File(absoluteFilepath).isDirectory()) {
               FileInputStream fi = new FileInputStream(absoluteFilepath);
-              String filename = absoluteFilepath.replace(fromDirectory, "");
+              String filename = absoluteFilepath.replace(absoluteFilepath.substring(0, absoluteFilepath.lastIndexOf("/")), "");
               ZipEntry entry = new ZipEntry(filename);
               out.putNextEntry(entry);
               origin = new BufferedInputStream(fi, BUFFER_SIZE);
