@@ -41,14 +41,14 @@ public class ZipCreateModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void zip(String[] paths, String destDirectory, Promise promise) {
+    public void zip(ReadableArray paths, String destDirectory, Promise promise) {
       List<String> filePaths = new ArrayList<>();
 
       String fromDirectory;
       String fileOrDirectory = "";
       try {
-        for (int i = 0; i < paths.length; i++) {
-            fileOrDirectory = paths[i];
+        for (int i = 0; i < paths.size(); i++) {
+            fileOrDirectory = paths.getString(i);
             File tmp = new File(fileOrDirectory);
             if (tmp.exists()) {
                 if (tmp.isDirectory()) {
