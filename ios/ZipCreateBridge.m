@@ -10,4 +10,10 @@ RCT_EXTERN_METHOD(zip:(NSArray<NSURL *>)from
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
+(BOOL)requiresMainQueueSetup
+{
+  return NO;
+}
+
+
 @end

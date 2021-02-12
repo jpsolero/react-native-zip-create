@@ -1,7 +1,7 @@
 {
   "name": "react-native-zip-create",
   "title": "React Native Zip Create",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Create Zip file from multiple source",
   "main": "index.js",
   "scripts": {
